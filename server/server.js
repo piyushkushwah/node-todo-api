@@ -20,14 +20,22 @@ app.post('/todos',(req,res)=>{
 },(e)=>{
     res.status(400).send(e);
 });
+});
 
-
+app.get('/todos',(req,res)=>{
+    TodoApp.find().then((todos)=>{
+        res.send({todos});
+    },(err)=>{
+        res.status(400);
+    });
 });
 
 
 app.get('/',(req,res)=>{
     res.send('hello express!:p');
 });
+
 app.listen(3000,()=>{
     console.log('SERVER Up on POrT 3000');
 }); 
+
