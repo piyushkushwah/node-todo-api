@@ -30,6 +30,29 @@ app.get('/todos',(req,res)=>{
     });
 });
 
+app.get('/ind',(req,res)=>{
+    TodoApp.findById("5b28b3f225fa6f3469670a3c").then((todos)=>{
+        if(!todos){
+            console.log('user not found');
+        }
+        res.send(todos);
+    }).catch((e)=>{
+        console.log(e);
+    });
+});
+
+app.get('/user',(req,res)=>{
+    User.findById("5b23cbb42194ba171bd921ac").then((docs)=>{
+        if(!docs){
+            console.log('User Not Found');
+        }else{
+            console.log('Good');
+            res.send(docs);
+        }
+    }).catch((e)=>{
+        console.log(e);
+    });
+});
 
 app.get('/',(req,res)=>{
     res.send('hello express!:p');
@@ -38,4 +61,5 @@ app.get('/',(req,res)=>{
 app.listen(3000,()=>{
     console.log('SERVER Up on POrT 3000');
 }); 
+
 
