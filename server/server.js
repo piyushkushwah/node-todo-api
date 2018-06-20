@@ -1,3 +1,4 @@
+const {ObjectID} = require('mongodb');
 const express = require('express');
 const bodyParser = require('body-parser');
 const {mongoose} = require('./db/mongoose');
@@ -30,15 +31,27 @@ app.get('/todos',(req,res)=>{
     });
 });
 
-app.get('/ind',(req,res)=>{
-    TodoApp.findById("5b28b3f225fa6f3469670a3c").then((todos)=>{
-        if(!todos){
-            console.log('user not found');
+app.get('/todos/:id',(req,res)=>{
+    var id = req.params.id;
+    if(!ObjectID.isValid(id)){
+        console.log("empty");
+        return res.status(404).send();
+       
+    }
+    TodoApp.findById(id).then((result)=>{
+        if(result){
+            res.send({result});
+            console.log("Success");
+        }else if(!result){
+            console.log("status 404 ");
+            return res.status(404).send();
+           
         }
-        res.send(todos);
+        
     }).catch((e)=>{
-        console.log(e);
+        res.status(404).send();
     });
+
 });
 
 app.get('/user',(req,res)=>{
