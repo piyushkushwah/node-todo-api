@@ -2,7 +2,7 @@ const {ObjectID} = require('mongodb');
 const express = require('express');
 const bodyParser = require('body-parser');
 const {mongoose} = require('./db/mongoose');
-var {TodoApp} = require('./models/todo');
+var {todoapp} = require('./models/todo');
 const {User} = require('./models/user');
 
 const app = express();
@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 app.post('/todos',(req,res)=>{ 
-  var todo = new TodoApp({
+  var todo = new todoapp({
         text:req.body.text
     
   });
@@ -25,7 +25,7 @@ app.post('/todos',(req,res)=>{
 });
 
 app.get('/todos',(req,res)=>{
-    TodoApp.find().then((todos)=>{
+    todoapp.find().then((todos)=>{
         res.send({todos});
     },(err)=>{
         res.status(400);
@@ -39,7 +39,7 @@ app.get('/todos/:id',(req,res)=>{
         return res.status(404).send();
        
     }
-    TodoApp.findById(id).then((result)=>{
+    todoapp.findById(id).then((result)=>{
         if(result){
             res.send({result});
             console.log("Success");
