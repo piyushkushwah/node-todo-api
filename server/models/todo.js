@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var todoapp = mongoose.model('todoapp',{
+var todoapp = mongoose.model('todoapps',{
     text:{
         type:String,
         required:true,
