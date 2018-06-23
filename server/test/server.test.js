@@ -2,7 +2,7 @@ const {ObjectID} = require("mongodb");
 var request = require("supertest");
 const expect = require('expect');
 const {app} = require('./../server');
-const {TodoApp} = require('./../models/todo');
+const {todoapp} = require('./../models/todo');
 
 const todos = [{
     _id: new ObjectID,
@@ -13,8 +13,8 @@ const todos = [{
 }];
 
 beforeEach((done)=>{
-    TodoApp.remove({}).then(()=>{
-       return TodoApp.insertMany(todos);
+    todoapp.remove({}).then(()=>{
+       return todoapp.insertMany(todos);
     }).then(()=>done());
 });
 
@@ -27,7 +27,7 @@ describe('POST /todos',()=>{
             if(err){
                 return(done);
             }
-            TodoApp.find().then((todos)=>{
+            todoapp.find().then((todos)=>{
                 expect(todos.length).toBe(3);
                 expect(todos[0].text).toBe(text);
                 done();

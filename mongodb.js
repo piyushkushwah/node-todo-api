@@ -4,7 +4,7 @@
 // console.log(name);
 const {MongoClient,ObjectID} = require('mongodb');
 
-MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,client)=>{
+MongoClient.connect('mongodb://localhost:27017/todoapp',(err,client)=>{
     if(err){
         console.log('unable to connect mongodb Server');
     }
@@ -18,7 +18,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,client)=>{
         console.log('Unable to fetch todos',err);
     });
     
-    // db.collection('TodoApp').insertOne({
+    // db.collection('todoapp').insertOne({
     //     text:"Something To do",
     //     completed:false
     // },(err,result)=>{

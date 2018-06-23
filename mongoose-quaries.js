@@ -1,6 +1,6 @@
 const {ObjectID} = require('mongodb');
 const {mongoose} =require('./server/db/mongoose');
-const {TodoApp} = require('./server/models/todo');
+const {todoapp} = require('./server/models/todo');
 const {User}  = require('./server/models/user');
 
 // var id= '5b28b3f225fa6f3469670a3b';
@@ -9,19 +9,19 @@ const {User}  = require('./server/models/user');
 //     console.log('Id not Valid');
 // }
 
-// TodoApp.find({
+// todoapp.find({
 //     _id:id
 // }).then((todos)=>{
-//     console.log('TodoApp',todos);
+//     console.log('todoapp',todos);
 // });
 
-// TodoApp.findOne({
+// todoapp.findOne({
 //     _id:id
 // }).then((todos)=>{
-//     console.log('TodoApp',todos);
+//     console.log('todoapp',todos);
 // });
 
-// TodoApp.findById(id).then((todos)=>{
+// todoapp.findById(id).then((todos)=>{
 //     if(!todos){
 //         return console.log('id not found');
 //     }

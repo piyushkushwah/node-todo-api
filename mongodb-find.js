@@ -12,7 +12,7 @@ MongoClient.connect('mongodb://localhost:27017/Users',(err,client)=>{
     console.log('Connected to MongoDb server');
     const db = client.db('Users');
 
-    // db.collection('TodoApp').find({_id:new ObjectId("5b221e952a545644eefb698e")}).toArray().then((count)=>{
+    // db.collection('todoapp').find({_id:new ObjectId("5b221e952a545644eefb698e")}).toArray().then((count)=>{
     //     console.log(`Todo Count:${count}`);
     //     console.log(JSON.stringify(,undefined,2));
     // },(err)=>{
@@ -26,7 +26,7 @@ MongoClient.connect('mongodb://localhost:27017/Users',(err,client)=>{
         console.log('unable to fetch todos',err);
     });
     
-    // db.collection('TodoApp').insertOne({
+    // db.collection('todoapp').insertOne({
     //     text:"Something To do",
     //     completed:false
     // },(err,result)=>{
