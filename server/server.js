@@ -78,9 +78,9 @@ app.delete('/todos/:id',(req,res)=>{
         if(!result){
             res.status(404).send();
             console.log("not found");
+        }else{
+        res.send({result});   
         }
-        res.send(result);   
-        console.log(result);
    }).catch((e)=>{
        console.log(e);
         res.status(400).send();
@@ -94,7 +94,7 @@ app.get('/',(req,res)=>{
 
 app.listen(port,()=>{
     console.log(`SERVER Up on POrT ${port}`);
-}); 0
+}); 
 
 
 module.exports = {app};

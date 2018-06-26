@@ -46,6 +46,7 @@ describe("GET /todos/:id",()=>{
         .get(`/todos/${todos[0]._id.toHexString()}`)
         .expect(200)
         .expect((res)=>{
+            console.log(res.body.result._id);
             expect(res.body.result.text).toBe(todos[0].text);
         })
           .end(done);
@@ -57,6 +58,49 @@ describe("GET /todos/:id",()=>{
 
         request(app)
         .get(`/todos/${hexId}`)
+        .expect(404)
+        .end(done); 
+    });
+    it('should return 404 for non-object ids',(done)=>{
+        // /todos/123
+        request(app)
+        .get(`/todos/123`)
+        .expect(404)
+        .end(done);
+    });
+});
+
+describe('DELETE /todos/:id',()=>{
+it('should return 200 Ok! ',(done)=>{
+    var hexId = todos[0]._id.toHexString();
+    request(app)
+    .delete(`/todos/${hexId}`)
+    .expect(200)
+    .expect((res)=>{
+        console.log(todos[0]._id.toHexString());
+        console.log(res.body.result._id);
+        expect(res.body.result._id).toBe(todos[0]._id.toHexString());
+
+    })
+    .end((err,res)=>{
+        if(err){
+            return done(err);
+        }
+
+        todoapp.findById(hexId).then((result)=>{
+            expect(result).toNotExist();
+            done();
+        }).catch((e)=>{
+            done(e);
+        });
+    });
+});
+
+    it('Should return 404',(done)=>{
+        var hexId = new ObjectID().toHexString();
+        console.log(new ObjectID().toHexString());
+        request(app)
+        .delete(`/todos/${hexId}`)
         .expect(404)
         .end(done); 
     });
