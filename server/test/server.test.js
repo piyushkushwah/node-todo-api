@@ -6,10 +6,13 @@ const { todoapp } = require('./../models/todo');
 
 const todos = [{
     _id: new ObjectID,
-    text: 'Test todo text'
+    text: 'Test todo text1',
+   
 }, {
     _id: new ObjectID,
-    text: 'second test todo'
+    text: 'second test todo',
+    completed:true,
+    completedAt:333
 }];
 
 beforeEach((done) => {
@@ -20,7 +23,7 @@ beforeEach((done) => {
 
 describe('POST /todos', () => {
     it('should create a new todo', (done) => {
-        var text = 'Test todo text';
+        var text = 'Test todo text1';
         request(app).post('/todos').send({ text }).expect(200).expect((res) => {
             expect(res.body.text).toBe(text);
         }).end((err, res) => {
@@ -46,7 +49,7 @@ describe("GET /todos/:id", () => {
             .get(`/todos/${todos[0]._id.toHexString()}`)
             .expect(200)
             .expect((res) => {
-                console.log(res.body.result._id);
+                console.log(res.body.result);
                 expect(res.body.result.text).toBe(todos[0].text);
             })
             .end(done);
@@ -69,7 +72,6 @@ describe("GET /todos/:id", () => {
             .end(done);
     });
 });
-
 describe('DELETE /todos/:id', () => {
     it('should return 200 Ok! ', (done) => {
         var hexId = todos[0]._id.toHexString();
@@ -112,3 +114,27 @@ describe('DELETE /todos/:id', () => {
             .end(done);
     });
 });
+
+describe('PATCH /todos/:id', () => {
+    it('should update the todo', (done) => {
+      var hexId = todos[0]._id.toHexString();
+      var text = 'Test todo text1212';
+  
+      request(app)
+        .patch(`/todos/${hexId}`)
+        .send({
+          completed: true,
+          text})
+        .expect(200)
+        .expect((res) => {
+            console.log(res.body);
+          expect(res.body.result.text).toBe(text);
+          expect(res.body.result.completed).toBe(true);
+          expect(res.body.result.completedAt).toBeA("number");
+        
+        })
+        .end(done);
+    });
+  
+   
+  });

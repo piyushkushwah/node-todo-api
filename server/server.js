@@ -1,3 +1,10 @@
+var env = process.env.NODE_ENV || 'devlopment';
+if(env=== 'devlopment'){
+    process.env.PORT = 3000;
+
+}else{
+    process.env.PORT = 3000;
+}
 const _= require("lodash");
 const { ObjectID } = require('mongodb');
 const express = require('express');
@@ -102,11 +109,14 @@ app.patch('/todos/:id',(req,res)=>{
         body.completed = false;
         body.completedAt = null;
     }
-    todoapp.findByIdAndUpdate(id,{$set:body},{$new:true}).then((result)=>{
+    todoapp.findByIdAndUpdate(id,{$set:body},{new:true}).then((result)=>{
+
         if(!result){
+            console.log(result)
             return res.status(404).send();
         }   
         res.send({result});
+        console.log(result);
     }).catch((e)=>{
         console.log(e);
         res.status(400).send();
